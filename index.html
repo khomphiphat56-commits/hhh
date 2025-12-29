@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earth 🤍 Opal</title>
+
+<style>
+/* ================= RESET ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+  background:linear-gradient(135deg,#f6eeff,#e4d3ff,#d3baff);
+  color:#4b3b6e;
+}
+
+/* ================= หน้าเข้า ================= */
+#enter{
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background:
+    radial-gradient(circle at top,#ffffff,#ead8ff,#cbb0ff);
+  z-index:50;
+}
+
+#enter::before{
+  content:"";
+  position:absolute;
+  inset:-50%;
+  background:
+    conic-gradient(from 0deg,#fff,#e9d9ff,#fff,#d9c2ff,#fff);
+  animation:spinBG 20s linear infinite;
+  opacity:.35;
+}
+
+@keyframes spinBG{
+  to{transform:rotate(360deg)}
+}
+
+#enter h1{
+  font-size:3rem;
+  text-shadow:0 0 40px rgba(170,120,255,.8);
+  z-index:2;
+}
+
+#enter p{
+  margin-top:12px;
+  font-size:1.1rem;
+  opacity:.85;
+  z-index:2;
+}
+
+#enter button{
+  margin-top:40px;
+  padding:18px 48px;
+  border:none;
+  border-radius:50px;
+  font-size:1.2rem;
+  background:linear-gradient(135deg,#b58cff,#e8c6ff);
+  color:white;
+  cursor:pointer;
+  box-shadow:0 25px 45px rgba(0,0,0,.3);
+  z-index:2;
+  transition:.3s;
+}
+
+#enter button:hover{
+  transform:scale(1.15);
+}
+
+/* ================= หน้าหลัก ================= */
+#main{
+  display:none;
+  position:relative;
+  width:100%;
+  height:100vh;
+}
+
+/* ออร่า */
+.aura{
+  position:absolute;
+  inset:-30%;
+  background:radial-gradient(circle,#ffffff66,transparent 65%);
+  animation:pulse 6s ease-in-out infinite;
+  z-index:1;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:.4}
+  50%{opacity:.9}
+}
+
+/* รูปคู่ตรงกลาง */
+.center-pic{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:210px;
+  height:210px;
+  border-radius:50%;
+  background:url('main.jpg') center/cover no-repeat;
+  box-shadow:
+    0 0 45px rgba(170,120,255,.8),
+    0 0 90px rgba(220,190,255,.6);
+  z-index:10;
+}
+
+/* กล่องข้อมูล */
+.box{
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:24px 30px;
+  text-align:center;
+  background:rgba(255,255,255,.65);
+  backdrop-filter:blur(12px);
+  border-radius:28px;
+  box-shadow:0 18px 35px rgba(0,0,0,.25);
+  z-index:10;
+  max-width:92%;
+}
+
+.box h2{
+  margin-bottom:8px;
+}
+
+.counter{
+  font-size:1rem;
+}
+
+textarea{
+  margin-top:12px;
+  width:100%;
+  border:none;
+  border-radius:16px;
+  padding:12px;
+  resize:none;
+}
+
+/* ================= รูปลอย ================= */
+.float{
+  position:absolute;
+  width:66px;
+  opacity:.9;
+  animation:floatUp linear infinite;
+  z-index:2;
+}
+
+@keyframes floatUp{
+  from{
+    transform:translateY(120vh) scale(.75);
+    opacity:0;
+  }
+  15%{opacity:1}
+  to{
+    transform:translateY(-25vh) scale(1);
+    opacity:0;
+  }
+}
+
+/* ================= หัวใจ ================= */
+.heart{
+  position:absolute;
+  font-size:18px;
+  color:rgba(190,130,255,.7);
+  animation:floatUp linear infinite;
+  z-index:2;
+}
+
+/* ================= กลิตเตอร์ ================= */
+.glitter{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  box-shadow:0 0 12px white;
+  animation:twinkle alternate infinite;
+  z-index:3;
+}
+
+@keyframes twinkle{
+  from{opacity:.2;transform:scale(.6)}
+  to{opacity:1;transform:scale(1.2)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- หน้าเข้า -->
+<div id="enter">
+  <h1>💜 1 Year Anniversary 💜</h1>
+  <p>Earth 🤍 Opal</p>
+  <button onclick="enterApp()">เข้าสู่ความทรงจำ</button>
+</div>
+
+<!-- หน้าหลัก -->
+<div id="main">
+  <div class="aura"></div>
+  <div class="center-pic"></div>
+
+  <div class="box">
+    <h2>คบกันมาแล้ว</h2>
+    <div class="counter" id="counter"></div>
+    <textarea rows="3" placeholder="เขียนข้อความถึงเขาได้ตรงนี้เลย…"></textarea>
+  </div>
+</div>
+
+<script>
+/* ========== เข้าแอป ========== */
+function enterApp(){
+  document.getElementById('enter').style.display='none';
+  document.getElementById('main').style.display='block';
+}
+
+/* ========== นับเวลา ========== */
+const startDate = new Date(2025,1,8,7,40,0);
+
+setInterval(()=>{
+  const now = new Date();
+  let diff = (now - startDate) / 1000;
+
+  const day = Math.floor(diff / 86400); diff %= 86400;
+  const hour = Math.floor(diff / 3600); diff %= 3600;
+  const min = Math.floor(diff / 60);
+  const sec = Math.floor(diff % 60);
+
+  counter.innerHTML =
+    `${day} วัน ${hour} ชั่วโมง ${min} นาที ${sec} วินาที`;
+},1000);
+
+/* ========== รูปลอย 6 รูป ========== */
+const pics = ['pic1.jpg','pic2.jpg','pic3.jpg','pic4.jpg','pic5.jpg','pic6.jpg'];
+
+for(let i=0;i<30;i++){
+  const img = document.createElement('img');
+  img.src = pics[i % pics.length];
+  img.className = 'float';
+  img.style.left = Math.random()*100 + 'vw';
+  img.style.animationDuration = 22 + Math.random()*20 + 's';
+  document.body.appendChild(img);
+}
+
+/* ========== หัวใจ (มากขึ้น) ========== */
+for(let i=0;i<28;i++){
+  const h = document.createElement('div');
+  h.className = 'heart';
+  h.innerHTML = '💜';
+  h.style.left = Math.random()*100 + 'vw';
+  h.style.animationDuration = 20 + Math.random()*22 + 's';
+  document.body.appendChild(h);
+}
+
+/* ========== กลิตเตอร์ ========== */
+for(let i=0;i<140;i++){
+  const g = document.createElement('div');
+  g.className = 'glitter';
+  g.style.left = Math.random()*100 + 'vw';
+  g.style.top = Math.random()*100 + 'vh';
+  g.style.animationDuration = 2 + Math.random()*4 + 's';
+  document.body.appendChild(g);
+}
+</script>
+
+</body>
+</html>
